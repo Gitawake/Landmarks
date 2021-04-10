@@ -9,8 +9,17 @@ import SwiftUI
 
 struct LandmarkList: View {
     var body: some View {
-        List(landmarks) { landmark in
-            LandmarkRow(landmark: landmark)
+        // 添加导航
+        NavigationView{
+            // 展开列表
+            List(landmarks) { landmark in
+                // 添加页面跳转，并向下个页面传递数据
+                NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
+                    LandmarkRow(landmark: landmark)
+                }
+            }
+            // 导航栏标题
+            .navigationTitle("Landmarks")
         }
     }
 }
