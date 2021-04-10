@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-// struct 结构：Hashable 哈希键值校验， Codable json解析
-struct Landmark: Hashable, Codable {
+// struct 结构：Hashable 哈希键值校验， Codable json解析， Identifiable 简化唯一标识获取方式
+struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
     var park: String
