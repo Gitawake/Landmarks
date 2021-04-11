@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LandmarkList: View {
     // 定义一个是否仅显示收藏的变量
-    @State private var showFavoritesOnly = true
+    @State private var showFavoritesOnly = false
     
     // 过滤已被收藏列表
     var filteredLandmarks: [Landmark] {
@@ -21,11 +21,18 @@ struct LandmarkList: View {
     var body: some View {
         // 添加导航
         NavigationView{
-            // 展开列表
-            List(filteredLandmarks) { landmark in
-                // 添加页面跳转，并向下个页面传递数据
-                NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
-                    LandmarkRow(landmark: landmark)
+            // 创建一个列表
+            List {
+                // 添加一个切换按钮
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                // 循环展开地标列表
+                ForEach (filteredLandmarks) { landmark in
+                    // 添加页面跳转，并向下个页面传递数据
+                    NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
+                        LandmarkRow(landmark: landmark)
+                    }
                 }
             }
             // 导航栏标题
