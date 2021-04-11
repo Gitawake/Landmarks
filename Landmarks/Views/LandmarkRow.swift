@@ -25,6 +25,14 @@ struct LandmarkRow: View {
             
             // 间隔物(垫片)
             Spacer()
+            
+            // 判断isFavorite
+            if landmark.isFavorite {
+                // 显示星星图案
+                Image(systemName: "star.fill")
+                    // 给星星上色
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }

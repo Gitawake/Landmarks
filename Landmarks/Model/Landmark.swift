@@ -16,6 +16,7 @@ struct Landmark: Hashable, Codable, Identifiable {
     var park: String
     var state: String
     var description: String
+    var isFavorite: Bool
     
     //从数据中读取图像名称
     private var imageName: String
