@@ -10,7 +10,7 @@ import SwiftUI
 // main 程序入口
 @main
 struct LandmarksApp: App {
-    // 初始化模型数据
+    // @StateObject 保证初始化模型数据只创建一次
     @StateObject private var modelData = ModelData()
     
     var body: some Scene {

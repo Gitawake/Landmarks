@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    // 环境变量模型
+    @EnvironmentObject var modelData: ModelData
+    
     // 从结构获取数据
     var landmark: Landmark
+    
+    //
+    var landmarkIndex: Int {
+        modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+    }
     
     var body: some View {
         // ScrollView 添加滚动条功能
@@ -30,10 +38,17 @@ struct LandmarkDetail: View {
             // VStack 列容器  // alignment 对齐方式
             VStack(alignment: .leading) {
                 
-                // 添加文本
-                Text(landmark.name)
-                    // 字体形式
-                    .font(.title)
+                // 行容器
+                HStack {
+                    // 添加文本
+                    Text(landmark.name)
+                        // 字体形式
+                        .font(.title)
+                        .foregroundColor(.primary)
+                    
+                    // 添加一个收藏按钮
+                    FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                }
                 
                 // 行容器
                 HStack {
@@ -65,7 +80,10 @@ struct LandmarkDetail: View {
 }
 
 struct LandmarkDetail_Previews: PreviewProvider {
+    static let modelData = ModelData()
+    
     static var previews: some View {
         LandmarkDetail(landmark: ModelData().landmarks[0])
+            .environmentObject(modelData)
     }
 }
