@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct LandmarkList: View {
+    // 修饰器自动获取值
+    @EnvironmentObject var modelData: ModelData
     // 定义一个是否仅显示收藏的变量
     @State private var showFavoritesOnly = false
     
     // 过滤已被收藏列表
     var filteredLandmarks: [Landmark] {
-        landmarks.filter { landmark in
+        // 引用ModelData更新页面
+        modelData.landmarks.filter { landmark in
             (!showFavoritesOnly || landmark.isFavorite)
         }
     }
@@ -46,6 +49,7 @@ struct LandmarkList_Previews: PreviewProvider {
         // 指定机型预览视图
 //        ForEach(["iPhone SE (2nd generation)","iPhone XS Max"], id: \.self) { deviceName in
             LandmarkList()
+                .environmentObject(ModelData())
 //                .previewDevice(PreviewDevice(rawValue: deviceName))
 //                .previewDisplayName(deviceName)
 //        }

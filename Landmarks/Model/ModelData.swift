@@ -6,9 +6,13 @@
 //
 
 import Foundation
+// 导入Combine框架，用于页面跟随数据更新
+import Combine
 
-// 绑定定义好的结构，实例化load传入json文件名
-var landmarks:[Landmark] = load("landmarkData.json")
+final class ModelData: ObservableObject {
+    // 绑定定义好的结构，实例化load传入json文件名
+    @Published var landmarks: [Landmark] = load("landmarkData.json")
+}
 
 // 利用Decodable解释JSON
 func load<T: Decodable>(_ filename: String) -> T {
