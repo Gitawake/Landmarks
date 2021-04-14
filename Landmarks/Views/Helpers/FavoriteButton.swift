@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoriteButton: View {
-    // 初始化一个变量,用于储存按钮状态
+    // 绑定一个变量,用于储存按钮状态
     @Binding var isSet: Bool
     
     var body: some View {
@@ -27,7 +27,7 @@ struct FavoriteButton: View {
 
 struct FavoriteButton_Previews: PreviewProvider {
     static var previews: some View {
-        // 设定变量isset为true
+        // 设定变量isSet为true
         FavoriteButton(isSet: .constant(true))
     }
 }

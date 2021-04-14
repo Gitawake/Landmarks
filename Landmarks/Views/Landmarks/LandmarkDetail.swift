@@ -14,7 +14,7 @@ struct LandmarkDetail: View {
     // 从结构获取数据
     var landmark: Landmark
     
-    //
+    // id绑定
     var landmarkIndex: Int {
         modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
     }
@@ -46,7 +46,7 @@ struct LandmarkDetail: View {
                         .font(.title)
                         .foregroundColor(.primary)
                     
-                    // 添加一个收藏按钮
+                    // 添加FavoriteButton视图,根据ID获取对应isFavorite状态
                     FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
                 }
                 
@@ -80,10 +80,12 @@ struct LandmarkDetail: View {
 }
 
 struct LandmarkDetail_Previews: PreviewProvider {
+    // 定义静态常量实例化
     static let modelData = ModelData()
     
     static var previews: some View {
         LandmarkDetail(landmark: ModelData().landmarks[0])
+            // 使用模型数据向下给视图传递数据
             .environmentObject(modelData)
     }
 }

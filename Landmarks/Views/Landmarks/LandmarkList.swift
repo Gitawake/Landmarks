@@ -49,6 +49,7 @@ struct LandmarkList_Previews: PreviewProvider {
         // 指定机型预览视图
 //        ForEach(["iPhone SE (2nd generation)","iPhone XS Max"], id: \.self) { deviceName in
             LandmarkList()
+                // 使用模型数据向下给视图传递数据
                 .environmentObject(ModelData())
 //                .previewDevice(PreviewDevice(rawValue: deviceName))
 //                .previewDisplayName(deviceName)

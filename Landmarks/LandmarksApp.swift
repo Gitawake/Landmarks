@@ -16,7 +16,7 @@ struct LandmarksApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                // 使用模型数据
+                // 使用模型数据向下给视图传递数据
                 .environmentObject(modelData)
         }
     }
