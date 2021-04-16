@@ -14,6 +14,8 @@ final class ModelData: ObservableObject {
     @Published var landmarks: [Landmark] = load("landmarkData.json")
     // 不会在初始加载后修改加息数据，所以不需要使用@Published属性
     var hikes: [Hike] = load("hikeData.json")
+    // 定义一个读写
+    @Published var profile = Profile.default
     
     var features: [Landmark] {
         landmarks.filter { $0.isFeatured }

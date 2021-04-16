@@ -11,6 +11,8 @@ struct CategoryHome: View {
     // 从环境读取数据
     @EnvironmentObject var modelData: ModelData
     
+    @State private var showingProfile = false
+    
     var body: some View {
         // 导航视图
         NavigationView {
@@ -34,7 +36,23 @@ struct CategoryHome: View {
                 // 边缘插图设置为零
                 .listRowInsets(EdgeInsets())
             }
+            // 删除弹窗小哥哥导致的插图
+            .listStyle(InsetListStyle())
             .navigationTitle("Featured")
+            
+            // 工具栏
+            .toolbar {
+                // 按钮
+                Button(action: { showingProfile.toggle() }) {
+                    Image(systemName: "person.crop.circle")
+                        .accessibilityLabel("User Profile")
+                }
+            }
+            // 弹窗效果
+            .sheet(isPresented: $showingProfile) {
+                ProfileHost()
+                    .environmentObject(modelData)
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            // 使用模型数据向下给视图传递数据
+            // 使用模型数据
             .environmentObject(ModelData())
     }
 }
