@@ -12,6 +12,8 @@ import Combine
 final class ModelData: ObservableObject {
     // 绑定定义好的结构，实例化load传入json文件名
     @Published var landmarks: [Landmark] = load("landmarkData.json")
+    // 不会在初始加载后修改加息数据，所以不需要使用@Published属性
+    var hikes: [Hike] = load("hikeData.json")
 }
 
 // 利用Decodable解释JSON
