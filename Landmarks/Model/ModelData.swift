@@ -14,6 +14,18 @@ final class ModelData: ObservableObject {
     @Published var landmarks: [Landmark] = load("landmarkData.json")
     // 不会在初始加载后修改加息数据，所以不需要使用@Published属性
     var hikes: [Hike] = load("hikeData.json")
+    
+    var features: [Landmark] {
+        landmarks.filter { $0.isFeatured }
+    }
+    
+    // 给类别绑定地标数据
+    var categories: [String: [Landmark]] {
+        Dictionary(
+            grouping: landmarks,
+            by: { $0.category.rawValue }
+        )
+    }
 }
 
 // 利用Decodable解释JSON
