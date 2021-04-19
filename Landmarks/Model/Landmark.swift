@@ -32,6 +32,12 @@ struct Landmark: Hashable, Codable, Identifiable {
         Image(imageName)
     }
     
+    //  从数据中读取图像名称 如果存在的话
+    var featureImage: Image? {
+        // 如果isFeatured等于true，返回图像名字，否则返回空
+        isFeatured ? Image(imageName + "_feature") : nil
+    }
+    
     private var coordinates: Coordinates
     //利用CoreLocation把数据转换成坐标地址
     var locationCoordinate: CLLocationCoordinate2D{

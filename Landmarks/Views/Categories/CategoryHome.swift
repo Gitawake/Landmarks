@@ -17,15 +17,8 @@ struct CategoryHome: View {
         // 导航视图
         NavigationView {
             List {
-                modelData.features[0].image
-                    // 可调整大小属性
-                    .resizable()
-                    // 自动缩放比例
-                    .scaledToFill()
-                    // 宽度
-                    .frame(height: 200)
-                    // 裁剪超出边框部分
-                    .clipped()
+                PageView(pages: modelData.features.map { FeatureCard(landmark: $0) })
+                    .aspectRatio(3 / 2, contentMode: .fit)
                     // 边缘插图设置为零
                     .listRowInsets(EdgeInsets())
                 
