@@ -19,5 +19,9 @@ struct LandmarksApp: App {
                 // 使用模型数据向下给视图传递数据
                 .environmentObject(modelData)
         }
+        
+        #if os(watchOS)
+        WKNotificationScene(controller: NotificationController.self, category: "LandmarkNear")
+        #endif
     }
 }
