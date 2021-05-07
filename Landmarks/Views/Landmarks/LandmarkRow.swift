@@ -20,8 +20,18 @@ struct LandmarkRow: View {
                 .resizable()
                 // 指定图片大小
                 .frame(width: 50, height: 50)
-            // 获取数据地标名称
-            Text(landmark.name)
+                // 图片圆角
+                .cornerRadius(5)
+            VStack(alignment: .leading) {
+                // 获取数据地标名称
+                Text(landmark.name)
+                    .bold()
+                #if !os(watchOS)
+                Text(landmark.park)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                #endif
+            }
             
             // 间隔物(垫片)
             Spacer()
@@ -30,10 +40,13 @@ struct LandmarkRow: View {
             if landmark.isFavorite {
                 // 显示星星图案
                 Image(systemName: "star.fill")
+                    .imageScale(.medium)
                     // 给星星上色
                     .foregroundColor(.yellow)
+                    
             }
         }
+        .padding(.vertical, 4)
     }
 }
 
@@ -49,6 +62,6 @@ struct LandmarkRow_Previews: PreviewProvider {
         }
         // 设置预览时图大小为列表一行的大小
         .previewLayout(.fixed(width: 300, height: 70))
-
+        
     }
 }

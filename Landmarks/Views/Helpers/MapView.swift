@@ -12,22 +12,38 @@ import MapKit
 struct MapView: View {
     var coordinate: CLLocationCoordinate2D
     // @State 表示UI和数据同步，数据变化UI跟着变化。
-    // @State 声明 private 私有 var 变量 = 坐标区域
-    @State private var region = MKCoordinateRegion()
+    
+    @AppStorage("MapView.zoom")
+    private var zoom: Zoom = .medium
+    
+    enum Zoom: String, CaseIterable, Identifiable {
+        case near = "Near"
+        case medium = "Medium"
+        case far = "Far"
+        
+        var id: Zoom {
+            return self
+        }
+    }
+    
+    var delta: CLLocationDegrees {
+        switch zoom {
+        case .near: return 0.02
+        case .medium: return 0.2
+        case .far: return 2
+        }
+    }
     
     var body: some View {
         // 调用地图(定位坐标：$region）
-        Map(coordinateRegion: $region)
-            .onAppear {
-                setRegion(coordinate)
-            }
+        Map(coordinateRegion: .constant(region))
     }
     
     // 基于坐标值更新区域的方法
-    private func setRegion(_ coordinate: CLLocationCoordinate2D) {
-        region = MKCoordinateRegion(
+    var region: MKCoordinateRegion {
+        MKCoordinateRegion(
             center: coordinate,
-            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
         )
     }
 }
